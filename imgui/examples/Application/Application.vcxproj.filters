@@ -103,5 +103,13 @@
     <Filter Include="BankyBonky">
       <UniqueIdentifier>{1fd58852-65c5-4f69-b3d7-2050936b8f91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\Others">
+      <UniqueIdentifier>{85e97b00-b60b-4dd6-bf36-ee422dd286ba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="BankyBonky Goals.txt">
+      <Filter>Application\Others</Filter>
+    </Text>
   </ItemGroup>
 </Project>
