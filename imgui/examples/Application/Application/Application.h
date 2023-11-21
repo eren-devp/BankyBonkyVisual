@@ -11,11 +11,6 @@
 #define GREEN ImVec4(0, 1, 0, 1)
 #define NIGHT_BLUE ImVec4(0, 0.35f, 1, 1)
 
-enum class PersonType
-{
-    t_Client, t_Employee
-};
-
 class Application
 {
 public:
@@ -27,14 +22,16 @@ private:
     void ManageClients();
     void ManageEmployees();
     void ManageEveryone();
-    
-    void GetNewUserInformations(PersonType t_type);
+
+    void ClientScreen();
+
+    void GetNewUserInformations(Helper::PersonType t_type);
     void AddClient();
     void AddEmployee();
     void SetSelectedFunction(void(__thiscall Application::* newFunc)() );
 
     void(Application::* selectedFunction)() = &Application::Login;
-    std::vector<void(Application::*)()> history;
+    std::vector<void(Application::*)()> history = std::vector<void(Application::*)()>();
 
     ImVec4 INFORMATION_COLOR = GREEN;
     ImVec4 INPUT_COLOR = NIGHT_BLUE;
@@ -45,8 +42,7 @@ private:
 
     Manager* manager = new Manager();
 
-    char loginUsername[12] = "a";
-    char loginPassword[6] = "a";
-    char username[12] = "";
-    char password[6] = "";
+    const char adminLoginUsername[12] = "admin";
+    const char adminLoginPassword[6] = "admin";
+    std::string firstName = "admin";
 };

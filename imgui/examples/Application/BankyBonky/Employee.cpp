@@ -1,7 +1,6 @@
 #include "Employee.hpp"
 
-Employee::Employee(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, int salary_) :
-	User(firstName_, lastName_, age_, idNumber_, status_)
+Employee::Employee(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, int salary_, std::string password_) : User(firstName_, lastName_, age_, idNumber_, status_, Helper::PersonType::t_Employee, password_)
 {
 	SetSalary(salary_);
 }

@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
+#include <Helper.h>
 
 // User class is the superclass of the other sub-classes. It contains common veriables and functions.
 class User {
 public:
 	// Base constructor function of the person. 
-	User(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_);
+	User(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, Helper::PersonType personType_, std::string password_);
 
 	// Returns the first name of the person.
     std::string GetFirstName();
@@ -22,21 +23,33 @@ public:
 	// Returns ID number of the person.
     std::string GetIDNumber();
 
+    // Returns the password of the person.
+    std::string GetPassword();
+
+    // Returns the type of the person.
+    Helper::PersonType GetPersonType();
+
 
 	// Sets the first name of the person.
-	void SetFirstName(std::string firstName_);
+	void SetFirstName(const std::string firstName_);
 
 	// Sets the last name of the person.
-	void SetLastName(std::string lastName_);
+	void SetLastName(const std::string lastName_);
 
 	// Sets the age of the person.
-	void SetAge(int age_);
+	void SetAge(const int age_);
 
 	// Sets the ID number of the person.
-	void SetIDNumber(std::string idNumber_);
+	void SetIDNumber(const std::string idNumber_);
 
 	// Sets the status of the person.
-	void SetStatus(std::string status_);
+	void SetStatus(const std::string status_);
+
+    // Sets the password of the person.
+    void SetPassword(const std::string password_);
+
+    // Sets the person type of the person.
+    void SetPersonType(const Helper::PersonType type_);
 
 	bool operator == (const User& user) const {
         return user.idNumber == this->idNumber;
@@ -48,4 +61,7 @@ private:
     std::string* status = new std::string;
 	int* age = new int;
     std::string* idNumber = new std::string;
+    std::string* password = new std::string;
+
+    Helper::PersonType personType;
 };

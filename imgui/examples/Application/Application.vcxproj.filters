@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\backends\imgui_impl_opengl3.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\backends\imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Helper.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="BankyBonky\Client.cpp">
+      <Filter>BankyBonky</Filter>
+    </ClCompile>
+    <ClCompile Include="BankyBonky\Employee.cpp">
+      <Filter>BankyBonky</Filter>
+    </ClCompile>
+    <ClCompile Include="BankyBonky\Manager.cpp">
+      <Filter>BankyBonky</Filter>
+    </ClCompile>
+    <ClCompile Include="BankyBonky\User.cpp">
+      <Filter>BankyBonky</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\backends\imgui_impl_opengl3.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\backends\imgui_impl_opengl3_loader.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\backends\imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Helper.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="BankyBonky\Client.hpp">
+      <Filter>BankyBonky</Filter>
+    </ClInclude>
+    <ClInclude Include="BankyBonky\Employee.hpp">
+      <Filter>BankyBonky</Filter>
+    </ClInclude>
+    <ClInclude Include="BankyBonky\Manager.hpp">
+      <Filter>BankyBonky</Filter>
+    </ClInclude>
+    <ClInclude Include="BankyBonky\User.hpp">
+      <Filter>BankyBonky</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini">
+      <Filter>ImGui</Filter>
+    </None>
+    <None Include="..\..\misc\natvis\imgui.natvis">
+      <Filter>ImGui</Filter>
+    </None>
+    <None Include="build_win32.bat">
+      <Filter>ImGui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{ce91bba3-9b4f-4d57-9dd7-b66a6aa79bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{03594998-bec1-410f-ad35-9bdd1b9961f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BankyBonky">
+      <UniqueIdentifier>{1fd58852-65c5-4f69-b3d7-2050936b8f91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

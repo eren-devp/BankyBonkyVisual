@@ -1,12 +1,14 @@
 #include "User.hpp"
 
-User::User(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_)
+User::User(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, Helper::PersonType personType_, std::string password_)
 {
 	SetFirstName(firstName_);
 	SetLastName(lastName_);
 	SetAge(age_);
 	SetIDNumber(idNumber_);
 	SetStatus(status_);
+    SetPersonType(personType_);
+    SetPassword(password_);
 }
 
 std::string User::GetFirstName()
@@ -34,7 +36,17 @@ std::string User::GetIDNumber()
 	return *idNumber;
 }
 
-void User::SetFirstName(std::string firstName_)
+std::string User::GetPassword()
+{
+    return *password;
+}
+
+Helper::PersonType User::GetPersonType()
+{
+    return personType;
+}
+
+void User::SetFirstName(const std::string firstName_)
 {
 	if (firstName_.empty()) {
 		throw std::exception("First name can not be empty.");
@@ -44,7 +56,7 @@ void User::SetFirstName(std::string firstName_)
 	}
 }
 
-void User::SetLastName(std::string lastName_)
+void User::SetLastName(const std::string lastName_)
 {
 	if (lastName_.empty()) {
 		throw std::exception("Last name can not be empty.");
@@ -54,7 +66,7 @@ void User::SetLastName(std::string lastName_)
 	}
 }
 
-void User::SetAge(int age_)
+void User::SetAge(const int age_)
 {
 	if (age_ < 18) {
 		throw std::exception("Person must be older than 18!");
@@ -64,7 +76,7 @@ void User::SetAge(int age_)
 	}
 }
 
-void User::SetIDNumber(std::string idNumber_)
+void User::SetIDNumber(const std::string idNumber_)
 {
 	if (idNumber_.empty()) {
 		throw std::exception("Not valid ID number.");
@@ -74,7 +86,17 @@ void User::SetIDNumber(std::string idNumber_)
 	}
 }
 
-void User::SetStatus(std::string status_)
+void User::SetStatus(const std::string status_)
 {
 	*status = status_;
+}
+
+void User::SetPassword(const std::string password_)
+{
+    *password = password_;
+}
+
+void User::SetPersonType(const Helper::PersonType type_)
+{
+    personType = type_;
 }

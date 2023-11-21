@@ -1,0 +1,23 @@
+BankyBonkyVisualized
+
+Goals:
+-> BankyBonky visual
+	-> Creating new User (client, employee)
+		-> Creating new client
+		-> Creating new employee
+		-> Checking the idNumber matchings
+		-> Checking if the password is valid
+		
+	-> Managing the Users
+		-> Saving the logs
+		
+	-> Basic systems
+		-> Back button
+		-> Viewing&managing the users
+		-> Login system
+		-> Implementing BankyBonky
+		-> Simple error-handlings
+	
+-> Save system
+	-> Cryption system
+	-> Encryption system

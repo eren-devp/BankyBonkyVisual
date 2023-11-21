@@ -1,6 +1,9 @@
 #pragma once
 #include <list>
 #include <iterator>
+#include <deque>
+#include <tuple>
+#include <Helper.h>
 
 #include "Client.hpp"
 #include "Employee.hpp"
@@ -32,6 +35,9 @@ public:
 
     std::list<Employee*> GetEmployees();
 #pragma endregion
+
+    // Returns the saved Employee or Clients.
+    std::deque<std::tuple<std::string, std::string, Helper::PersonType, std::string>> GetLoginTuples();
 
 private:
 	std::list<Client*> clients;

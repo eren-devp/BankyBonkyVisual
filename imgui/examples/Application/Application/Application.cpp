@@ -1,48 +1,81 @@
 #include "Application.h"
 
+
 Application::Application()
 {
-    Client* cl = new Client("1", "1", 20, "12704324542", "vip");
-    Client* cdl = new Client("2", "2", 20, "12705324542", "vip");
-    Client* asd = new Client("3", "3", 20, "12704324942", "vip");
-    Client* as = new Client("4", "4", 20, "12305324542", "vip");
-    Client* ff = new Client("5", "5", 20, "12706324542", "vip");
-    Client* fff = new Client("6", "6", 20, "12705124542", "vip");
-    manager->AddClient(cl);
-    manager->AddClient(cdl);
-    manager->AddClient(asd);
-    manager->AddClient(as);
-    manager->AddClient(ff);
-    manager->AddClient(fff);
+    Client* me = new Client("talha", "genc", 20, "12704324542", "vip", "asdf");
+    Client* testClient = new Client("2", "2", 20, "12705324542", "vip", "a");
+    Client* testClient2 = new Client("3", "3", 20, "12704324942", "vip", "a");
+    Client* testClient3 = new Client("4", "4", 20, "12305324542", "vip", "a");
+    Client* testClient4 = new Client("5", "5", 20, "12706324542", "vip", "a");
+    Client* testClient5 = new Client("6", "6", 20, "12705124542", "vip", "a");
+    manager->AddClient(me);
+    manager->AddClient(testClient);
+    manager->AddClient(testClient2);
+    manager->AddClient(testClient3);
+    manager->AddClient(testClient4);
+    manager->AddClient(testClient5);
+
+    Employee* testEmployee = new Employee("burak", "ergul", 21, "12121212121", "manager", 30000,"aa");
+    manager->AddEmployee(testEmployee);
 }
+
+template<size_t N> void ResetCharArray(char(&arr)[N]) { memset(&arr, 0, sizeof(arr)); }
 
 void Application::Login()
 {
-    ImGui::InputTextWithHint("username", "enter the username", username, IM_ARRAYSIZE(username), ImGuiInputTextFlags_Password);
+    static char username[12] = "";
+    static char password[6] = "";
 
+    ImGui::InputTextWithHint("username", "enter the username", username, IM_ARRAYSIZE(username), ImGuiInputTextFlags_Password);
     ImGui::InputTextWithHint("password", "enter the password", password, IM_ARRAYSIZE(password), ImGuiInputTextFlags_Password);
 
     ImGui::Text(username);
     ImGui::Text(password);
-    ImGui::Text(loginUsername);
-    ImGui::Text(loginPassword);
 
-    if (std::string(loginUsername) == std::string(username) && (std::string(loginPassword) == std::string(password)))
+    ImGui::Spacing(); ImGui::SameLine();
+
+    if (ImGui::Button("login", ImVec2(100, 50)))
     {
-        SetSelectedFunction(&Application::ManageEveryone);
+        for (auto person : manager->GetLoginTuples())
+        {
+            if (std::get<0>(person) == std::string(username) && std::get<1>(person) == std::string(password))
+            {
+                if (std::get<2>(person) == Helper::PersonType::t_Client)
+                {
+                    SetSelectedFunction(&Application::ClientScreen);
+                    firstName = std::get<3>(person);
 
-        memset(username, 0, sizeof username);
-        memset(password, 0, sizeof password);
+                    ResetCharArray(username);
+                    ResetCharArray(password);
+                }
+                else
+                {
+                    SetSelectedFunction(&Application::ManageClients);
+
+                    ResetCharArray(username);
+                    ResetCharArray(password);
+                }
+            }
+            else if (std::string(adminLoginUsername) == std::string(username) && (std::string(adminLoginPassword) == std::string(password)))
+            {
+                SetSelectedFunction(&Application::ManageEveryone);
+
+                ResetCharArray(username);
+                ResetCharArray(password);
+            }
+        }
     }
 }
 
-void Application::GetNewUserInformations(PersonType t_type)
+void Application::GetNewUserInformations(Helper::PersonType t_type)
 {
     static char firstName[16];
     static char lastName[16];
     static char status[16];
-    static int age = 18;
     static char idNumber[12];
+    static char password[16];
+    static int age = 18;
     static int salary;
 
     ImGui::BeginTable("Input-Table", 3);
@@ -77,11 +110,18 @@ void Application::GetNewUserInformations(PersonType t_type)
     ImGui::TableNextRow();
     ImGui::TableNextColumn();
 
+    ImGui::TextColored(INPUT_COLOR, "Password:");
+    ImGui::TableNextColumn();
+    ImGui::InputText("password", password, IM_ARRAYSIZE(password), false);
+
+    ImGui::TableNextRow();
+    ImGui::TableNextColumn();
+
     ImGui::TextColored(INPUT_COLOR, "Age: ");
     ImGui::TableNextColumn();
     ImGui::DragInt("age", &age, 1, 18, 120);
 
-    if (t_type == PersonType::t_Employee)
+    if (t_type == Helper::PersonType::t_Employee)
     {
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
@@ -93,26 +133,29 @@ void Application::GetNewUserInformations(PersonType t_type)
 
     if (ImGui::Button("Reset"))
     {
-        memset(firstName, 0, sizeof firstName);
-        memset(lastName, 0, sizeof lastName);
-        memset(status, 0, sizeof status);
-        memset(idNumber, 0, sizeof idNumber);
+        ResetCharArray(firstName);
+        ResetCharArray(lastName);
+        ResetCharArray(status);
+        ResetCharArray(idNumber);
+        ResetCharArray(password);
         age = 18;
         salary = 0;
     }
     ImGui::SameLine();
+
     if (ImGui::Button("Add"))
     {
-        if (t_type == PersonType::t_Client)
-            manager->AddClient(new Client(firstName, lastName, age, idNumber, status));
+        if (t_type == Helper::PersonType::t_Client)
+            manager->AddClient(new Client(firstName, lastName, age, idNumber, status, password));
 
-        else if (t_type == PersonType::t_Employee)
-            manager->AddEmployee(new Employee(firstName, lastName, age, idNumber, status, salary));
+        else if (t_type == Helper::PersonType::t_Employee)
+            manager->AddEmployee(new Employee(firstName, lastName, age, idNumber, status, salary, password));
 
-        memset(firstName, 0, sizeof firstName);
-        memset(lastName, 0, sizeof lastName);
-        memset(status, 0, sizeof status);
-        memset(idNumber, 0, sizeof idNumber);
+        ResetCharArray(firstName);
+        ResetCharArray(lastName);
+        ResetCharArray(status);
+        ResetCharArray(idNumber);
+        ResetCharArray(password);
         age = 18;
         salary = 0;
     }
@@ -120,20 +163,36 @@ void Application::GetNewUserInformations(PersonType t_type)
     ImGui::EndTable();
 }
 
-void Application::AddClient()
-{
-    GetNewUserInformations(PersonType::t_Client);
-}
+void Application::AddClient() { GetNewUserInformations(Helper::PersonType::t_Client); }
 
-void Application::AddEmployee()
-{
-    GetNewUserInformations(PersonType::t_Employee);
-}
+void Application::AddEmployee() { GetNewUserInformations(Helper::PersonType::t_Employee); }
 
 void Application::SetSelectedFunction(void(__thiscall Application::*newFunc)())
 {
     history.push_back(newFunc);
     selectedFunction = newFunc;
+}
+
+// TODO
+void Application::ClientScreen()
+{
+    ImGui::BeginTable("client-screen", 3);
+    ImGui::TableNextColumn();
+    // 1, 1
+
+    ImGui::TableNextColumn();
+    // 1, 2
+
+    ImGui::TableNextColumn();
+    // 1, 3
+
+    ImGui::TextColored(NIGHT_BLUE, ("Welcome back " + firstName).c_str());
+
+    ImGui::TableNextRow();
+    ImGui::TableNextColumn();
+    // 2, 1
+
+    ImGui::EndTable();
 }
 
 void Application::ManageClients()
@@ -146,6 +205,7 @@ void Application::ManageClients()
     {
         int i = 0;
         ImGui::BeginTable("Client-Table", 5);
+
         for (Client* client : manager->GetClients())
         {
             if (i % 5 == 0)
@@ -183,6 +243,7 @@ void Application::ManageEmployees()
 {
     ImGui::Spacing();
     ImGui::Spacing(); ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine();
+
     if (manager->GetEmployees().size() == 0)
         ImGui::TextColored(RED, "No Employee!");
     else

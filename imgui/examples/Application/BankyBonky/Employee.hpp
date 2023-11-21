@@ -4,7 +4,7 @@
 class Employee : public User {
 public:
 	// Constructor function of the employee.
-	Employee(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, int salary_);
+	Employee(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, int salary_, std::string password_);
 
 	// Returns the salary of the employee.
 	int GetSalary();
