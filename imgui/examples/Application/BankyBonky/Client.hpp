@@ -1,5 +1,6 @@
 #pragma once
 #include "User.hpp"
+#include <string>
 
 class Client : public User {
 public:
@@ -10,10 +11,17 @@ public:
 	~Client();
 
 	// Returns the current money of the client.
-	std::string GetMoney();
+    long long int GetMoney();
+
+    std::string GetMoneyS();
 
 	// Sets the current money of the client.
-	void SetMoney(std::string money_);
+	void SetMoney(unsigned long long int money_);
+
+    // Withdraws money from the client.
+    void WithdrawMoney(unsigned long long int amount);
+
+    void DepositMoney(unsigned long long int amount);
 private:
-	std::string* money = new std::string;
+	unsigned long long int* money = new unsigned long long int;
 };

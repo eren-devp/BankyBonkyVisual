@@ -39,6 +39,8 @@ public:
     // Returns the saved Employee or Clients.
     std::deque<std::tuple<std::string, std::string, Helper::PersonType, std::string>> GetLoginTuples();
 
+    Client* GetClientByIdNumber(std::string idNumber);
+
 private:
 	std::list<Client*> clients;
 	std::list<Employee*> employees;

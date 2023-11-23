@@ -8,6 +8,8 @@ public:
 	// Base constructor function of the person. 
 	User(std::string firstName_, std::string lastName_, int age_, std::string idNumber_, std::string status_, Helper::PersonType personType_, std::string password_);
 
+    User();
+
 	// Returns the first name of the person.
     std::string GetFirstName();
 

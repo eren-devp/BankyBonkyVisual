@@ -48,4 +48,11 @@ std::deque<std::tuple<std::string, std::string, Helper::PersonType, std::string>
 
     return loginTuples;
 }
+Client* Manager::GetClientByIdNumber(std::string idNumber)
+{
+    for (auto person : GetClients())
+    {
+        if (person->GetIDNumber() == idNumber) return person;
+    }
+}
 #pragma endregion

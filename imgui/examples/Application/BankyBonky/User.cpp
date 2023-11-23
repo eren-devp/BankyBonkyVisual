@@ -11,6 +11,10 @@ User::User(std::string firstName_, std::string lastName_, int age_, std::string 
     SetPassword(password_);
 }
 
+User::User()
+{
+}
+
 std::string User::GetFirstName()
 {
 	return *firstName;

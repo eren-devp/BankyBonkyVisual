@@ -44,5 +44,6 @@ private:
 
     const char adminLoginUsername[12] = "admin";
     const char adminLoginPassword[6] = "admin";
-    std::string firstName = "admin";
+
+    Client* client;
 };

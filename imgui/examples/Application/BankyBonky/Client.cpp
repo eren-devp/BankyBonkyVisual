@@ -10,12 +10,30 @@ Client::~Client()
 	
 }
 
-std::string Client::GetMoney()
+long long int Client::GetMoney()
 {
 	return *money;
 }
 
-void Client::SetMoney(std::string money_)
+std::string Client::GetMoneyS()
+{
+    return std::to_string(GetMoney());
+}
+
+void Client::SetMoney(unsigned long long int money_)
 {
 	*money = money_;
+}
+
+void Client::WithdrawMoney(unsigned long long int amount)
+{
+    if (*money >= amount)
+    {
+        *money -= amount;
+    }
+}
+
+void Client::DepositMoney(unsigned long long int amount)
+{
+    *money += amount;
 }

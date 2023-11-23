@@ -3,18 +3,20 @@
 
 Application::Application()
 {
-    Client* me = new Client("talha", "genc", 20, "12704324542", "vip", "asdf");
-    Client* testClient = new Client("2", "2", 20, "12705324542", "vip", "a");
-    Client* testClient2 = new Client("3", "3", 20, "12704324942", "vip", "a");
-    Client* testClient3 = new Client("4", "4", 20, "12305324542", "vip", "a");
-    Client* testClient4 = new Client("5", "5", 20, "12706324542", "vip", "a");
-    Client* testClient5 = new Client("6", "6", 20, "12705124542", "vip", "a");
+    Client* me = new Client("talha", "genc", 20, "123", "vip", "asdf");
+    Client* testClient = new Client("2", "2", 20, "1234", "vip", "a");
+    Client* testClient2 = new Client("3", "3", 20, "1235", "vip", "a");
+    Client* testClient3 = new Client("4", "4", 20, "1236", "vip", "a");
+    Client* testClient4 = new Client("5", "5", 20, "1237", "vip", "a");
+    Client* testClient5 = new Client("6", "6", 20, "1238", "vip", "a");
     manager->AddClient(me);
     manager->AddClient(testClient);
     manager->AddClient(testClient2);
     manager->AddClient(testClient3);
     manager->AddClient(testClient4);
     manager->AddClient(testClient5);
+
+    me->SetMoney(150000);
 
     Employee* testEmployee = new Employee("burak", "ergul", 21, "12121212121", "manager", 30000,"aa");
     manager->AddEmployee(testEmployee);
@@ -44,7 +46,8 @@ void Application::Login()
                 if (std::get<2>(person) == Helper::PersonType::t_Client)
                 {
                     SetSelectedFunction(&Application::ClientScreen);
-                    firstName = std::get<3>(person);
+
+                    client = manager->GetClientByIdNumber(username);
 
                     ResetCharArray(username);
                     ResetCharArray(password);
@@ -173,24 +176,40 @@ void Application::SetSelectedFunction(void(__thiscall Application::*newFunc)())
     selectedFunction = newFunc;
 }
 
-// TODO
 void Application::ClientScreen()
 {
     ImGui::BeginTable("client-screen", 3);
-    ImGui::TableNextColumn();
-    // 1, 1
+    ImGui::TableNextColumn(); // 1, 1
+    ImGui::TextColored(GREEN, "Name - Surname: ");
 
-    ImGui::TableNextColumn();
-    // 1, 2
+    ImGui::TableNextColumn(); // 1, 2
+    ImGui::Text(std::string(client->GetFirstName() + " " + client->GetLastName()).c_str());
 
-    ImGui::TableNextColumn();
-    // 1, 3
-
-    ImGui::TextColored(NIGHT_BLUE, ("Welcome back " + firstName).c_str());
+    ImGui::TableNextColumn(); // 1, 3
+    ImGui::TextColored(NIGHT_BLUE, ("Welcome back " + client->GetFirstName()).c_str());
 
     ImGui::TableNextRow();
-    ImGui::TableNextColumn();
-    // 2, 1
+    ImGui::TableNextColumn(); // 2, 1
+    ImGui::TextColored(GREEN, "Money on account: ");
+
+    ImGui::TableNextColumn(); // 2, 2
+    ImGui::Text(client->GetMoneyS().c_str());
+
+    ImGui::TableNextRow();
+    ImGui::TableNextColumn(); // 3, 1
+    ImGui::Separator();
+    if (ImGui::CollapsingHeader("Transactions"))
+    {
+        if (ImGui::Button("Withdraw Money"))
+        {
+            client->WithdrawMoney(3000);
+        }
+        
+        if (ImGui::Button("Deposit Money"))
+        {
+            client->DepositMoney(3000);
+        }
+    }
 
     ImGui::EndTable();
 }
@@ -226,7 +245,7 @@ void Application::ManageClients()
             ImGui::SameLine(); ImGui::Text(client->GetIDNumber().c_str());
 
             ImGui::TextColored(INFORMATION_COLOR, "Money on Account: ");
-            ImGui::SameLine(); ImGui::Text(client->GetMoney().c_str());
+            ImGui::SameLine(); ImGui::Text(client->GetMoneyS().c_str());
 
             ImGui::TextColored(INFORMATION_COLOR, "Status: ");
             ImGui::SameLine(); ImGui::Text(client->GetStatus().c_str());
